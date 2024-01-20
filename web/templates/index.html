@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello world</h1>
+    <h1>Web</h1>
+    <form action="/ascii-art" method="post">
+        <label for="text">Text:</label>
+        <input type="text" id="text" name="text" required><br><br>
+
+        <label for="banner">Banner:</label>
+        <select name="banner" id="banner" required>
+            <option value="standard">Standard</option>
+            <option value="shadow">Shadow</option>
+            <option value="thinkertoy">Thinkertoy</option>
+            <option value="pawp">Pawp</option>
+            <option value="thousandstars">Thousandstars</option>
+        </select><br><br>
+
+        <input type="submit" value="Generate ASCII Art">
+    </form>
 </body>
 </html>

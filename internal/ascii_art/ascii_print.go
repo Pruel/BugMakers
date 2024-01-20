@@ -1,4 +1,4 @@
-package utils
+package ascii
 
 import (
 	"fmt"
@@ -37,7 +37,7 @@ func checkAsciiPos(symb rune) int {
 }
 
 // преобразуем входной текст, используя заданный баннер
-func printAscii(banner, inputTxt string) (string, error) {
+func PrintAscii(banner, inputTxt string) (string, error) {
 	// разделяем баннер на строки
 	splitBanner := strings.Split(banner, "\n")
 	// разделяем входной текст на строки
