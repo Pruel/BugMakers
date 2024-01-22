@@ -1,17 +1,19 @@
 package handlers
 
 import (
+	ascii "BugMakers/internal/ascii_art"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
-	ascii "web/internal/ascii_art"
 )
 
 func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
-		log.Printf("400")
-		Error(w, "Method is not supported", http.StatusBadRequest)
+		//log.Printf("400")
+		//Error(w, "Method is not supported", http.StatusBadRequest)
+		ErrorPage(w, r, "400")
+		return
 	}
 
 	// Извлекаем данные из POST запроса
@@ -20,14 +22,18 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 
 	banner, err := loadBanner(bannerName)
 	if err != nil {
-		log.Printf("Failed to load banner")
-		Error(w, "Failed to load banner", http.StatusInternalServerError)
+		log.Printf("Failed to load banner: %v", err)
+		//Error(w, "Failed to load banner", http.StatusInternalServerError)
+		ErrorPage(w, r, "500")
+		return
 	}
 
 	asciiArt, err := ascii.PrintAscii(banner, text)
 	if err != nil {
-		log.Printf("Failed print ascii")
-		Error(w, "Failed print ascii", http.StatusInternalServerError)
+		log.Printf("Failed print ascii: %v", err)
+		//Error(w, "Failed print ascii", http.StatusInternalServerError)
+		ErrorPage(w, r, "500")
+		return
 	}
 
 	// Send our result

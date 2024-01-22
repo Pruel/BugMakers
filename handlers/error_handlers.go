@@ -6,9 +6,10 @@ import (
 	"net/http"
 )
 
-func Error(w http.ResponseWriter, errMsg string, status int) {
-	http.Error(w, errMsg, status)
-}
+//	func Error(w http.ResponseWriter, errMsg string, status int) {
+//		http.Error(w, errMsg, status)
+//	}
+//
 // обрабатывает ошибки и устанавливает http-статусы для ответа
 func ErrorPage(w http.ResponseWriter, r *http.Request, errorCode string) {
 	status, message := getErrorDetails(errorCode)
@@ -39,7 +40,7 @@ func getErrorDetails(errorCode string) (int, string) {
 // рендерит html-страницу ошибки с использованием шаблона
 func renderErrorPage(w http.ResponseWriter, message string) error {
 
-	tmpl, err := template.ParseFiles("templates/error.html")
+	tmpl, err := template.ParseFiles("web/templates/error.html")
 	if err != nil {
 		return err
 	}
