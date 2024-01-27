@@ -1,64 +1,73 @@
 package ascii
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
-// будем использовать мапу, для хранения позиций (это ускорит поиск позиции)
-var asciiPositions map[rune]int
+const (
+	asciiStart      = ' '
+	asciiEnd        = '~'
+	bannerHeight    = 9 
+	invalidPosition = -1
+)
 
-// особенная функция в GO, в нашем случае она позволит заполнить asciiPositions данными еще до начала выполнения основной команды
-// (не имеет явного вызова)
-func init() {
+var asciiPositions = generateAsciiPositions()
 
-	asciiPositions = make(map[rune]int)
-
-	for i, char := range asciiStorage() {
-		asciiPositions[char] = 1 + (9 * i)
+func generateAsciiPositions() map[rune]int {
+	positions := make(map[rune]int)
+	asciiRange := asciiEnd - asciiStart + 1
+	for i := 0; i < int(asciiRange); i++ {
+		positions[rune(asciiStart)+rune(i)] = 1 + (bannerHeight * i)
 	}
+	return positions
 }
 
-func asciiStorage() (storage string) {
-
-	for i := ' '; i <= '~'; i++ {
-		storage += string(i)
+func checkAsciiPos(symb rune) int {
+	if pos, exists := asciiPositions[symb]; exists {
+		return pos
 	}
-	return storage
+	return invalidPosition
 }
 
-// проверяем, существует ли позиция
-func checkPosition(char rune, Ascii string) int {
-	for i, character := range Ascii {
-		if character == char {
-			return 1 + (9 * i)
-		}
-	}
-	return -1
-}
+func PrintAscii(banner, inputTxt string) (string, error) {
+	splitBanner := strings.Split(banner, "\n")
+	lines := strings.Split(inputTxt, "\\n")
 
-// преобразуем входной текст, используя заданный баннер
-func PrintAscii(banner, inputText string) (string, error) {
-	ourFileTransform := strings.Split(banner, "\n")
-	asciiStorage :=  asciiStorage()
-
-	lines := strings.Split(inputText, "\\n")
 	var resultBuilder strings.Builder
 
 	for _, line := range lines {
-		for row := 0; row < 9; row++ {
+		for row := 0; row < bannerHeight; row++ {
 			for _, char := range line {
-				charPosition := checkPosition(char, asciiStorage)
-				if charPosition == -1 {
-					return "", fmt.Errorf("Invalid character : %c", char)
+				charPosition := checkAsciiPos(char)
+				if charPosition == invalidPosition {
+					return "", fmt.Errorf("invalid character: %c", char)
 				}
-				resultBuilder.WriteString(ourFileTransform[charPosition+row])
+				resultBuilder.WriteString(splitBanner[charPosition+row])
 			}
-			if row != 8 {
+			if row != bannerHeight-1 {
 				resultBuilder.WriteString("\n")
 			}
 		}
 	}
+
 	return resultBuilder.String(), nil
 }
 
+func LoadBanner(banner string) (string, error) {
+	file, err := os.Open(banner)
+	if err != nil {
+		return "", err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	var builder strings.Builder
+	for scanner.Scan() {
+		builder.WriteString(scanner.Text())
+		builder.WriteString("\n")
+	}
+	return builder.String(), nil
+}

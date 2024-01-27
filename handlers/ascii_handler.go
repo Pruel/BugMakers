@@ -1,13 +1,10 @@
 package handlers
 
 import (
-	"bufio"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
-	"os"
-	"strings"
 
 	ascii "web/internal/ascii_art"
 )
@@ -27,7 +24,7 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 
 	bannerPath := fmt.Sprintf("./internal/banner/%s.txt", bannerName)
 
-	banner, err := loadBanner(bannerPath)
+	banner, err := ascii.LoadBanner(bannerPath)
 	if err != nil {
 		log.Printf("Failed to load banner: %v", err)
 		ErrorPage(w, r, "500")
@@ -43,7 +40,7 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 		ErrorPage(w, r, "500")
 		return
 	}
-	log.Printf("Generated ASCII Art:\n%s", asciiArt)
+	log.Printf("Generated ASCII Art:\n%s \n\n\n", asciiArt)
 	asciiArtCache = asciiArt
 
 	data := map[string]string{
@@ -61,20 +58,4 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error execute template - ascii_art.html: %v", err)
 		ErrorPage(w, r, "500")
 	}
-}
-
-func loadBanner(banner string) (string, error) {
-	file, err := os.Open(banner)
-	if err != nil {
-		return "", err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	var builder strings.Builder
-	for scanner.Scan() {
-		builder.WriteString(scanner.Text())
-		builder.WriteString("\n")
-	}
-	return builder.String(), nil
 }
