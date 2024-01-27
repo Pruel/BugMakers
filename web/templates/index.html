@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
     <title>Document</title>
 </head>
-<body>
-    <h1>Web</h1>
-    <form action="/ascii-art" method="post">
-        <label for="text">Text:</label>
-        <input type="text" id="text" name="text" required><br><br>
+<body class="background-image">
+    <div class="header">
+        <div class="container">
+            <div class="header-logo">
+                <img src="/static/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+    <form action="/ascii-art" method="post" class="form-container">
+        <div class="form-container"></div>
+        <input type="text" id="text" name="text" placeholder="Hello World">
+        <button type="submit">GO</button>
 
         <label for="banner">Banner:</label>
         <select name="banner" id="banner" required>
@@ -20,7 +28,7 @@
             <option value="thousandstars">Thousandstars</option>
         </select><br><br>
 
-        <input type="submit" value="Generate ASCII Art">
+        
     </form>
 </body>
 </html>
