@@ -28,31 +28,31 @@ func asciiStorage() (storage string) {
 }
 
 // проверяем, существует ли позиция
-func checkAsciiPos(symb rune) int {
-
-	if pos, exists := asciiPositions[symb]; exists {
-		return pos
+func checkPosition(char rune, Ascii string) int {
+	for i, character := range Ascii {
+		if character == char {
+			return 1 + (9 * i)
+		}
 	}
 	return -1
 }
 
 // преобразуем входной текст, используя заданный баннер
-func PrintAscii(banner, inputTxt string) (string, error) {
-	// разделяем баннер на строки
-	splitBanner := strings.Split(banner, "\n")
-	// разделяем входной текст на строки
-	lines := strings.Split(inputTxt, "\\n")
+func PrintAscii(banner, inputText string) (string, error) {
+	ourFileTransform := strings.Split(banner, "\n")
+	asciiStorage :=  asciiStorage()
 
+	lines := strings.Split(inputText, "\\n")
 	var resultBuilder strings.Builder
 
-	for _, line := range lines { // итерация по строкам входного текста
-		for row := 0; row < 9; row++ { // проходим по каждой их 9 строк баннера
-			for _, char := range line { // проходим по символам в текущей строке входного текста
-				charPosition := checkAsciiPos(char)
+	for _, line := range lines {
+		for row := 0; row < 9; row++ {
+			for _, char := range line {
+				charPosition := checkPosition(char, asciiStorage)
 				if charPosition == -1 {
-					return "", fmt.Errorf("invalid character : %c", char)
+					return "", fmt.Errorf("Invalid character : %c", char)
 				}
-				resultBuilder.WriteString(splitBanner[charPosition+row])
+				resultBuilder.WriteString(ourFileTransform[charPosition+row])
 			}
 			if row != 8 {
 				resultBuilder.WriteString("\n")
@@ -61,3 +61,4 @@ func PrintAscii(banner, inputTxt string) (string, error) {
 	}
 	return resultBuilder.String(), nil
 }
+

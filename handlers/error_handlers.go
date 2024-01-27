@@ -6,11 +6,6 @@ import (
 	"net/http"
 )
 
-//	func Error(w http.ResponseWriter, errMsg string, status int) {
-//		http.Error(w, errMsg, status)
-//	}
-//
-// обрабатывает ошибки и устанавливает http-статусы для ответа
 func ErrorPage(w http.ResponseWriter, r *http.Request, errorCode string) {
 	status, message := getErrorDetails(errorCode)
 	// устанавливаем http-статусный код ответа
@@ -23,7 +18,6 @@ func ErrorPage(w http.ResponseWriter, r *http.Request, errorCode string) {
 	}
 }
 
-// наши коды состояния
 func getErrorDetails(errorCode string) (int, string) {
 	switch errorCode {
 	case "400":
