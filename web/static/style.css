@@ -92,3 +92,49 @@ body {
     left: 0;
     right: 0;
 }
+
+.button-container button {
+    padding: 10px 20px;
+    background-color: bisque;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: rgb(211, 159, 96);
+}
+
+.art-container {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+}
+
+.secbut-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.secbut-container a {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    text-decoration: none;
+    background-color: bisque;
+    color: black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.art-container a:hover {
+    background-color: rgb(211, 159, 96);
+}
