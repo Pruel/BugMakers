@@ -13,7 +13,7 @@ Ascii-art-web is to create and run a server to run a web-based GUI (graphical us
 
 ## Clone the repository 
 ```
-git clone НЕ ЗАБЫТЬ ССЫЛКУ СЮДА ВСТАВИТЬ. 
+git clone https://github.com/Pruel/BugMakers.git
 ```
 
 ## Usage 
