@@ -3,11 +3,11 @@ Ascii-art-web is to create and run a server to run a web-based GUI (graphical us
 
 # Preview
 
-![landing page]()
+![landing page](./web/screenshots/homePage.png)
 
-![Result page]()
+![Result page](./web/screenshots/resultPage.png)
 
-![Error page]()
+![Error page](./web/screenshots/errorPage.png)
 
 # Getting started
 

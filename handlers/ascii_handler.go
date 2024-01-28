@@ -48,7 +48,7 @@ func AsciiHandler(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("Received text: %s", text)
 	log.Printf("Selected banner: %s", bannerName)
-	log.Printf("Generated ASCII Art:\n%s \n\n\n", asciiArt)
+	log.Printf("Generated ASCII Art:\n%s \n", asciiArt)
 
 	asciiArtCache = asciiArt
 	data := map[string]string{
