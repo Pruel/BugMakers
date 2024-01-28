@@ -34,7 +34,7 @@ func getErrorDetails(errorCode string) (int, string) {
 // рендерит html-страницу ошибки с использованием шаблона
 func renderErrorPage(w http.ResponseWriter, message string) error {
 
-	tmpl, err := template.ParseFiles("web/templates/error.html")
+	tmpl, err := template.ParseFiles("./web/templates/error.html")
 	if err != nil {
 		return err
 	}
