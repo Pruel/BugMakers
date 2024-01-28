@@ -1,3 +1,3 @@
-module web
+module BugMakers
 
 go 1.20

@@ -1,11 +1,11 @@
 package handlers
 
 import (
+	ascii "BugMakers/internal/ascii_art"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
-	ascii "web/internal/ascii_art"
 )
 
 var (

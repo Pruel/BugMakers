@@ -1,10 +1,10 @@
 package main
 
 import (
+	"BugMakers/handlers"
 	"fmt"
 	"log"
 	"net/http"
-	"web/handlers"
 )
 
 func main() {
