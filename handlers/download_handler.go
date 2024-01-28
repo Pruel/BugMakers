@@ -6,7 +6,11 @@ import (
 )
 
 func DownloadAsciiArtHandler(w http.ResponseWriter, r *http.Request) {
-	// Здесь должен быть ваш код для генерации ASCII-арта или получения его из хранилища
+	if r.Method != http.MethodGet {
+		ErrorPage(w,r, http.StatusMethodNotAllowed)
+		return
+	}
+	
 	asciiArt := asciiArtCache
 
 	if asciiArt == "" {
@@ -14,7 +18,6 @@ func DownloadAsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Установка необходимых заголовков для файла
 	w.Header().Set("Content-Type", "text/plain")
 	w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s.txt\"", "ascii-art"))
 	w.Header().Set("Content-Length", fmt.Sprint(len(asciiArt)))

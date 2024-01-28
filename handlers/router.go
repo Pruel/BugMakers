@@ -1,10 +1,17 @@
 package handlers
 
-import "net/http"
+import (
+	"log"
+	"net/http"
+)
 
 func Router() {
-	http.HandleFunc("/", IndexHandler) // Обработчик для корневого пути
+	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/ascii-art", AsciiHandler)
 	http.HandleFunc("/download", DownloadAsciiArtHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("web/static"))))
+
+	log.Println("Routes are configurated.")
 }
+
+
