@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
     <title>Ascii Art Result</title>
 </head>
-<body>
-    <h1>Your ASCII Art:</h1>
-    <pre id="ascii-art">{{.AsciiArt}}</pre>
-    <a href="/download" download="ascii-art.txt">Download ASCII Art</a>
-    <a href="/">Return</a>
+<body class="background-image">
+    <div class="art-container">
+        <h1>Your ASCII Art:</h1>
+        <pre id="ascii-art">{{.AsciiArt}}</pre>
+        <div class="secbut-container">
+            <a href="/download" download="ascii-art.txt">Download ASCII Art</a>
+            <a href="/">Return</a>
+        </div>
+    </div>
 </body>
 </html>
